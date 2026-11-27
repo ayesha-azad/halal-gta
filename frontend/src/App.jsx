@@ -68,6 +68,7 @@ export default function App() {
               <footer className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-[11px] text-slate-500">
                 <span className="flex items-center gap-2"><Sparkles size={12} className="text-neon" /><T id="gtaTag" /></span>
                 <span><T id="footerNote" /></span>
+                <span className="font-medium text-slate-400"><T id="madeBy" /></span>
               </footer>
             </main>
           </div>

@@ -89,6 +89,41 @@ Copy `frontend/.env.example.prod` to `frontend/.env.production`, set the public 
 
 Static hosts such as Vercel can host the frontend; the FastAPI backend must be deployed separately or exposed as a rewrite/proxy. The frontend origin must be listed in the backend's `TAJWEED_CORS_ORIGINS`, including for same-origin POST requests.
 
+## CI / CD (GitHub Actions → Vercel)
+
+`.github/workflows/ci.yml` runs on every push to `main` and on every pull request:
+
+- **Frontend:** `npm ci`, production build, high-severity audit, and a secret scan of the built bundle.
+- **Backend:** dependency install, byte-compile, FastAPI import + `/health` route check, and production config guards.
+- **Security:** env-file hygiene, safe `VITE_*` names, no hard-coded backend endpoints, tracked-file secret scan.
+
+When all checks pass **on a push to `main`**, the `deploy` job publishes the frontend to Vercel using the CLI (`vercel pull` → `vercel build --prod` → `vercel deploy --prebuilt --prod`). The Vite project root is `frontend/` (see `frontend/vercel.json`).
+
+### GitHub configuration
+
+Add these repository secrets under **Settings → Secrets and variables → Actions**:
+
+| Secret | Where to find it |
+| --- | --- |
+| `VERCEL_TOKEN` | Vercel → Settings → Tokens → Create Token |
+| `VERCEL_ORG_ID` | Vercel project → Settings → General → Organization ID |
+| `VERCEL_PROJECT_ID` | Vercel project → Settings → General → Project ID |
+
+Optional public **variables** (same page, *Variables* tab) used at build time:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `VITE_API_URL` | `/api` | Browser API base URL in the deployed bundle |
+| `VITE_TAJWEED_API_URL` | `/api/tajweed` | Tajweed endpoint base URL in the deployed bundle |
+
+### Vercel configuration
+
+- Import the repo with **Root Directory** set to `frontend` (Vite framework preset, `npm run build`, `dist` output).
+- If Vercel's Git integration is enabled for this repo, disable its automatic deployments when using this workflow, so a push doesn't create two production deployments.
+- Only the frontend is deployed here. Point `VITE_API_URL` / `VITE_TAJWEED_API_URL` at your deployed HTTPS backend (for example `https://api.example.com/api`). Keeping the `/api` default requires an edge rewrite/proxy to the backend, which must also allow the Vercel origin in `TAJWEED_CORS_ORIGINS`.
+
+The global footer displays `Made by AAzad in Kashmir 🍁`; its text lives in `madeBy` in `frontend/src/i18n/translations.js`.
+
 ## Privacy
 
 Quests, streak, tasbeeh counts, and story-card settings live only in browser `localStorage`. Microphone audio is sent for analysis only when you tap record and is never stored.
