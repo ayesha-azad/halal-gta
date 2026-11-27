@@ -79,13 +79,15 @@ The browser never talks to the upstream prayer or Quran APIs directly, and no se
 
 ### Backend
 
-Deploy `backend/` with the included `Dockerfile` or `Procfile` (Render/Railway/Heroku). Set production environment variables in the host.
+Deploy `backend/` with the included `Dockerfile` or `Procfile` (Render/Railway/Heroku). Copy `backend/.env.example.prod` to `backend/.env` on the host and replace every placeholder. Production fails fast unless `ALLOWED_HOSTS`, `TAJWEED_CORS_ORIGINS`, and a strong `SESSION_TOKEN_SECRET` (at least 32 characters) are set. Upstream API URLs must use HTTPS.
+
+Keep `API_ACCESS_KEY` empty for the browser app: if set, every `/api` request requires `X-API-Key`, which cannot be kept secret in the frontend. Protect the backend at the reverse-proxy/edge layer instead.
 
 ### Frontend
 
-Build with `npm run build` and serve `frontend/dist`. Set `VITE_API_URL` / `VITE_TAJWEED_API_URL` to an absolute HTTPS backend URL when not proxying `/api` at the edge. Same-origin `/api` defaults work behind a reverse proxy.
+Copy `frontend/.env.example.prod` to `frontend/.env.production`, set the public backend URLs, then build with `npm run build` and serve `frontend/dist`. Use an absolute HTTPS backend URL when the API is on another host, or `/api` when a reverse proxy forwards `/api` to the backend on the same domain.
 
-Static hosts such as Vercel can host the frontend; the FastAPI backend must be deployed separately or exposed as a rewrite/proxy.
+Static hosts such as Vercel can host the frontend; the FastAPI backend must be deployed separately or exposed as a rewrite/proxy. The frontend origin must be listed in the backend's `TAJWEED_CORS_ORIGINS`, including for same-origin POST requests.
 
 ## Privacy
 
