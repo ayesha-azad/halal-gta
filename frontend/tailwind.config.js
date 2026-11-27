@@ -12,8 +12,8 @@ export default {
         cyan: "#3d6ff6",
       },
       fontFamily: {
-        sans: ["Pricedown", "Passion One", "Outfit", "Josefin Sans", "system-ui", "sans-serif"],
-        display: ["Pricedown", "Passion One", "Outfit", "Josefin Sans", "system-ui", "sans-serif"],
+        sans: ["Rage Italic", "Outfit", "Josefin Sans", "system-ui", "sans-serif"],
+        display: ["Pricedown", "Rage Italic", "Outfit", "Josefin Sans", "system-ui", "sans-serif"],
         urdu: ["Urdu Najd", "Noto Nastaliq Urdu", "serif"],
       },
       boxShadow: {
