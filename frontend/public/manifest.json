@@ -1,0 +1,12 @@
+{
+  "name": "Halal GTA",
+  "short_name": "Halal GTA",
+  "description": "A mindful gamer companion for prayer, deeds and Tajweed practice.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080b1d",
+  "theme_color": "#080b1d",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon", "purpose": "any maskable" }
+  ]
+}

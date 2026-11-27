@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Passion+One:wght@400;700;900&display=swap");
+
+@font-face {
+  font-family: "Urdu Najd";
+  src: url("/fonts/UrduNajd-v3.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Readability pass: a calm body font, slightly larger scale and lighter weights.
+   Display font is reserved for decorative artwork only. */
+:root {
+  color-scheme: dark;
+  --primary: #ff2b90;
+  --secondary: #ff9347;
+  --gold: #ffbc24;
+  font-family: "Outfit", "Josefin Sans", "Urdu Najd", system-ui, sans-serif;
+  background: #080b1d;
+  color: #f8fafc;
+}
+
+html {
+  font-size: 17px;
+}
+
+.font-black,
+.font-bold,
+.font-semibold,
+strong,
+b {
+  font-weight: 600;
+}
+
+.eyebrow,
+.mini-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.btn,
+.nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.text-\[10px\] {
+  font-size: 0.75rem;
+}
+
+.text-\[11px\] {
+  font-size: 0.8125rem;
+}
+
+.text-xs {
+  font-size: 0.8125rem;
+}
+
+.text-sm {
+  font-size: 0.9375rem;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(61, 111, 246, 0.22), transparent 35%),
+    radial-gradient(circle at 88% 10%, rgba(255, 43, 144, 0.18), transparent 32%),
+    #080b1d;
+}
+
+.urdu-text, [dir="rtl"].urdu-text {
+  font-family: "Urdu Najd", "Noto Nastaliq Urdu", serif !important;
+  line-height: 1.7;
+  letter-spacing: normal;
+}
+
+.arabic-line {
+  font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+  font-size: 1.9rem;
+  line-height: 2.2;
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-glow backdrop-blur-xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-neon to-violet text-white hover:brightness-110 disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply border border-white/15 bg-white/5 text-slate-100 hover:bg-white/10;
+  }
+
+  .btn-small {
+    @apply px-4 py-2 text-xs;
+  }
+
+  .eyebrow {
+    @apply mb-2 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-gold;
+  }
+
+  .mini-label {
+    @apply text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white;
+  }
+
+  .nav-link-active {
+    @apply bg-gradient-to-r from-neon/25 to-violet/25 text-white shadow-glow;
+  }
+
+  .field-input {
+    @apply w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-neon/60;
+  }
+
+  .switch {
+    @apply relative h-6 w-11 rounded-full bg-white/15 transition;
+  }
+
+  .switch::after {
+    content: "";
+    @apply absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform;
+  }
+
+  input:checked + .switch {
+    @apply bg-neon;
+  }
+
+  input:checked + .switch::after {
+    @apply translate-x-5;
+  }
+}
+
+.waveform canvas {
+  width: 100%;
+  height: 72px;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+
+/* Ambient motion field: Arabic dhikr and stylised GTA hardware. */
+.ambient-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  --mx: 0px;
+  --my: 0px;
+  --scroll: 0px;
+}
+.ambient-grid {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(rgba(196, 181, 216, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 181, 216, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 72%);
+  transform: translate3d(calc(var(--mx) * -0.4), calc(var(--my) * -0.4 + var(--scroll)), 0);
+}
+.ambient-item {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  opacity: 0.16;
+  filter: blur(0.2px);
+  animation: ambient-drift var(--duration) ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+  transform: translate3d(
+    calc(var(--mx) * var(--depth)),
+    calc(var(--my) * var(--depth) + var(--scroll) * var(--depth)),
+    0
+  );
+  will-change: transform, opacity;
+}
+.ambient-item.tone-coral { color: var(--secondary); }
+.ambient-item.tone-sand { color: var(--gold); }
+.ambient-item.tone-teal { color: var(--primary); }
+.ambient-item.arabic span {
+  font-family: "Urdu Najd", "Noto Nastaliq Urdu", serif;
+  font-size: var(--size);
+  line-height: 1;
+  text-shadow: 0 0 30px currentColor;
+}
+.ambient-item.vector svg { opacity: 0.85; }
+.ambient-field.is-paused .ambient-item,
+.ambient-field.is-paused .ambient-grid {
+  animation: none !important;
+  transform: none !important;
+}
+
+@keyframes ambient-drift {
+  0% { margin-top: -12px; margin-left: -8px; opacity: 0.08; }
+  50% { opacity: 0.2; }
+  100% { margin-top: 20px; margin-left: 12px; opacity: 0.1; }
+}

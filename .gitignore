@@ -5,6 +5,7 @@ backend/.venv/
 .env
 .env.*
 !.env.example
+!.env.production
 !.env.*.example
 *.log
 .DS_Store
