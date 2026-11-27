@@ -1,4 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Passion+One:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap");
+
+/* Pricedown — the GTA-style display face, self-hosted so Vercel builds are
+   independent of third-party CDNs. Only one weight ships; map every weight
+   to it so Tailwind's font-bold/font-semibold classes don't synthesise one. */
+@font-face {
+  font-family: "Pricedown";
+  src: url("/fonts/Pricedown.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Urdu Najd";
@@ -12,20 +23,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Readability pass: a calm body font, slightly larger scale and lighter weights.
-   Display font is reserved for decorative artwork only. */
+/* GTA-style typography across the whole UI. Pricedown has a compact glyph
+   height, so the root size is larger than a typical body font. Urdu and Arabic
+   copy keeps its own scripts via the overrides below. */
 :root {
   color-scheme: dark;
   --primary: #ff2b90;
   --secondary: #ff9347;
   --gold: #ffbc24;
-  font-family: "Outfit", "Josefin Sans", "Urdu Najd", system-ui, sans-serif;
+  font-family: "Pricedown", "Passion One", "Outfit", "Josefin Sans", "Urdu Najd", system-ui, sans-serif;
+  line-height: 1.45;
   background: #080b1d;
   color: #f8fafc;
 }
 
 html {
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .font-black,
@@ -38,31 +51,31 @@ b {
 
 .eyebrow,
 .mini-label {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.12em;
 }
 
 .btn,
 .nav-link {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 500;
 }
 
 .text-\[10px\] {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .text-\[11px\] {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .text-xs {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .text-sm {
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 html,

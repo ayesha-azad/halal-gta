@@ -2,6 +2,10 @@
 
 A mindful GTA 6 companion: prayer countdowns, real-world deeds for in-game milestones, a daily Ayah/Tasbeeh rotation, and an optional Tajweed practice studio.
 
+## Typography
+
+The whole UI uses a self-hosted **Pricedown** font (`frontend/public/fonts/Pricedown.woff`, the GTA-style face from CDN Fonts, free for personal use). Since Pricedown renders small, the root font size is increased to 19px and small label sizes are bumped too. Urdu and Arabic text keeps `Urdu Najd` / Noto fonts.
+
 ## Structure
 
 ```text
